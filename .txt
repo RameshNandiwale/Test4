@@ -1,0 +1,86 @@
+https://lex.infosysapps.com/en/app/toc/lex_auth_01275806667282022456/overview
+https://lex.infosysapps.com/en/app/toc/lex_auth_0127673005629194241/overview
+https://lex.infosysapps.com/en/app/toc/lex_auth_013277735944642560656/overview
+https://lex.infosysapps.com/en/app/toc/lex_auth_0129590294994042881510/overview -behavoural
+https://lex.infosysapps.com/en/app/toc/lex_33493780988125323000/overview -- C#
+https://lex.infosysapps.com/en/viewer/web-module/lex_auth_01289676119317708819?collectionId=lex_33493780988125323000&collectionType=Course
+=====Default
+DROP TABLE Car;
+CREATE TABLE Car(
+  model char(10) not null, 
+  name varchar2(10),
+  mfyear date default sysdate
+);
+desc Car;
+insert into car (model, name) values('indigo', 'tata');
+select * from car;
+
+=======Primary key;
+drop table employee;
+create table employee(
+empid integer,
+primary key(empid),
+empname varchar2(10) not null
+);
+desc employee;
+insert into employee values(101, 'avinash');
+insert into employee values(102, 'avinash');
+select * from employee;
+
+=======Check
+drop table employee;
+create table employee(
+empid integer,
+primary key(empid),
+empname varchar2(10) not null,
+gender char,
+CHECK(gender in('m', 'f'))
+);
+desc employee;
+insert into employee values(101, 'avinash', 'm');
+insert into employee values(102, 'avinash',null);
+select * from employee;
+
+========Unique
+drop table employee;
+create table employee(
+empid integer,
+primary key(empid),
+empname varchar2(10) not null,
+gender char,
+CHECK(gender in('m', 'f')),
+contactno number(10),
+unique(contactno)
+);
+desc employee;
+insert into employee values(101, 'avinash', 'm', 1234567890);
+insert into employee values(102, 'avinash', null, null);
+select * from employee;
+
+======foreign key
+drop table student;
+drop table marks;
+
+create table student(
+studentid integer primary key,
+fname varchar2(10)
+);
+/* this is comments*/
+
+create table marks(
+courseid integer,
+studentid integer,
+Foreign key(studentid) REFERENCES student(studentid),
+marksscored decimal(5,2)
+);
+
+desc student;
+desc marks;
+
+insert into student values(101, 'roshan');
+insert into student values(102, 'aksahy');
+select * from student;
+
+insert into marks values(801, 101, 45.40);
+insert into marks values(802, 102, 65.40);
+select * from marks;
